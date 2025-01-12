@@ -59,7 +59,7 @@ export class AuthController {
 		}
 	}
 
-	@Throttle(10, 10)
+	@Throttle({ default: { limit: 10, ttl: 10000 } })
 	@HttpCode(HttpStatus.OK)
 	@Post('login')
 	async login(@Body() dto: LoginDTO, @Req() req: Request, @Res() res: Response) {
@@ -116,21 +116,21 @@ export class AuthController {
 		}
 	}
 
-	@Throttle(5, 10)
+	@Throttle({ default: { limit: 5, ttl: 10000 } })
 	@Post('registration-confirmation')
 	async registrationConfirmation(@Body() dto: CodeConfirmationDTO, @Res() res: Response) {
 		const result = await this.usersService.confirmCodeFromEmail(dto.code);
 		return result ? res.sendStatus(HttpStatus.NO_CONTENT) : res.sendStatus(HttpStatus.NOT_FOUND);
 	}
 
-	@Throttle(5, 10)
+	@Throttle({ default: { limit: 5, ttl: 10000 } })
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Post('registration')
 	async registration(@Body() dto: UserDTO) {
 		return await this.usersService.newRegisteredUser(dto);
 	}
 
-	@Throttle(5, 10)
+	@Throttle({ default: { limit: 5, ttl: 10000 } })
 	@Post('registration-email-resending')
 	async resendRegistrationCode(@Body() dto: EmailResendDTO, @Res() res: Response) {
 		const result = await this.emailService.sendEmailConfirmationMessageAgain(dto.email);
