@@ -9,14 +9,14 @@ import { User, UserSchema } from '../user/user.schema';
 import { BlackListModule } from '../black_list/blacklist.module';
 
 @Module({
-	imports: [
-		MongooseModule.forFeature([
-			{ name: RefreshToken.name, schema: RefreshTokenSchema },
-			{ name: User.name, schema: UserSchema },
-		]),
-		BlackListModule,
-	],
-	providers: [AccessTokenService, RefreshTokenService, RefreshTokensRepository, UserRepository],
-	exports: [AccessTokenService, RefreshTokenService, RefreshTokensRepository],
+    imports: [
+        MongooseModule.forFeature([
+            { name: RefreshToken.name, schema: RefreshTokenSchema },
+            { name: User.name, schema: UserSchema },
+        ]),
+        BlackListModule,
+    ],
+    providers: [AccessTokenService, RefreshTokenService, RefreshTokensRepository, UserRepository],
+    exports: [AccessTokenService, RefreshTokenService, RefreshTokensRepository],
 })
 export class TokenModule {}

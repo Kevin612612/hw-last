@@ -14,18 +14,18 @@ import { BlackListModule } from '../black_list/blacklist.module';
 import { CommentExistsValidation } from '../../validation/commentValidation';
 
 @Module({
-	imports: [
-		MongooseModule.forFeature([
-			{ name: Comment.name, schema: CommentSchema },
-			{ name: Blog.name, schema: BlogSchema },
-			{ name: Post.name, schema: PostSchema },
-		]),
-		TokenModule,
-		UserModule,
-		BlackListModule,
-	],
-	controllers: [CommentController],
-	providers: [CommentService, CommentRepository, PostRepository, BlogRepository, CommentExistsValidation],
-	exports: [CommentService, CommentRepository],
+    imports: [
+        MongooseModule.forFeature([
+            { name: Comment.name, schema: CommentSchema },
+            { name: Blog.name, schema: BlogSchema },
+            { name: Post.name, schema: PostSchema },
+        ]),
+        TokenModule,
+        UserModule,
+        BlackListModule,
+    ],
+    controllers: [CommentController],
+    providers: [CommentService, CommentRepository, PostRepository, BlogRepository, CommentExistsValidation],
+    exports: [CommentService, CommentRepository],
 })
 export class CommentsModule {}

@@ -10,14 +10,14 @@ import { UserModule } from '../ENTITIES/user/user.module';
 import { DeviceExistsValidation } from '../validation/deviceValidation';
 
 @Module({
-	imports: [
-		MongooseModule.forFeature([{ name: RefreshToken.name, schema: RefreshTokenSchema }]),
-		UserModule,
-		TokenModule,
-		BlackListModule,
-	],
-	controllers: [DevicesController],
-	providers: [RefreshTokenService, RefreshTokensRepository, DeviceExistsValidation],
-	exports: [],
+    imports: [
+        MongooseModule.forFeature([{ name: RefreshToken.name, schema: RefreshTokenSchema }]),
+        UserModule,
+        TokenModule,
+        BlackListModule,
+    ],
+    controllers: [DevicesController],
+    providers: [RefreshTokenService, RefreshTokensRepository, DeviceExistsValidation],
+    exports: [],
 })
 export class DevicesModule {}

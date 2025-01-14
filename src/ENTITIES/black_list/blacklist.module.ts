@@ -5,9 +5,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BlackList, BlackListSchema } from './blacklist.schema';
 
 @Module({
-	imports: [MongooseModule.forFeature([{ name: BlackList.name, schema: BlackListSchema }])],
-	controllers: [],
-	providers: [BlackListService, BlackListRepository],
-	exports: [BlackListService, BlackListRepository],
+    imports: [MongooseModule.forFeature([{ name: BlackList.name, schema: BlackListSchema }])],
+    controllers: [],
+    providers: [BlackListService, BlackListRepository],
+    exports: [BlackListService, BlackListRepository],
 })
 export class BlackListModule {}

@@ -10,18 +10,18 @@ import { BadRequestException } from '@nestjs/common';
  * with the formatted errors for a more user-friendly error response.
  */
 export const ValidationPipeOptions = {
-	stopAtFirstError: true,
-	exceptionFactory: (errors) => {
-		const errorsForResponse = [];
+    stopAtFirstError: true,
+    exceptionFactory: (errors) => {
+        const errorsForResponse = [];
 
-		// take messages from array of errors and put them into errorsForResponse
-		errors.forEach((er) => {
-			const constraintsKeys = Object.keys(er.constraints);
-			constraintsKeys.forEach((conKey) => {
-				errorsForResponse.push({ message: er.constraints[conKey], field: er.property });
-			});
-		});
+        // take messages from array of errors and put them into errorsForResponse
+        errors.forEach((er) => {
+            const constraintsKeys = Object.keys(er.constraints);
+            constraintsKeys.forEach((conKey) => {
+                errorsForResponse.push({ message: er.constraints[conKey], field: er.property });
+            });
+        });
 
-		throw new BadRequestException(errorsForResponse);
-	},
+        throw new BadRequestException(errorsForResponse);
+    },
 };

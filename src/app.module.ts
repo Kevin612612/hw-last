@@ -23,69 +23,69 @@ import configuration from './custom.configuration';
 import { PostModule } from './ENTITIES/post/post.module';
 import { TokenModule } from './ENTITIES/tokens/tokens.module';
 import { UserModule } from './ENTITIES/user/user.module';
+import { getEnvFile } from './environments/env';
 
 const entityModules = [UserModule, BlogModule, PostModule, CommentModule, TokenModule, BlackListModule];
 const rolesModules = [SysAdminModule, BloggerModule];
 
 @Module({
-	imports: [
-		ConfigModule.forRoot({
-			isGlobal: true,
-			//envFilePath: `src/environments/${process.env.NODE_ENV}.env`,
-			envFilePath: `src/environments/development.env`,
-			//load: [configuration],
-			validationSchema: Joi.object({
-				PORT: Joi.number().default(3000).required(),
-				MONGO_URL: Joi.string().required(),
-				//NODE_ENV: Joi.string().default('development').valid('development', 'production', 'testing'),
-			}),
-		}), //add first
-		CqrsModule.forRoot(),
-		MongooseModule.forRootAsync({
-			useFactory: async (configService: ConfigService) => ({
-				uri: configService.get('MONGO_URL'),
-			}),
-			inject: [ConfigService],
-		}),
-		AuthModule,
-		EmailModule,
-		CacheModule.register({ isGlobal: false }),
-		DevicesModule,
-		ThrottlerModule.forRoot([
-			{
-			  name: 'short',
-			  ttl: 1000,
-			  limit: 3,
-			},
-			{
-			  name: 'medium',
-			  ttl: 10000,
-			  limit: 20
-			},
-			{
-			  name: 'long',
-			  ttl: 60000,
-			  limit: 100
-			}
-		  ]),
-		...rolesModules,
-		...entityModules,
-		DatabaseModule,
-		DraftModule,
-	],
-	controllers: [AppController],
-	providers: [
-		AppService,
-		{
-			provide: APP_GUARD,
-			useClass: ThrottlerGuard,
-		},
-	],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: `src/environments/${getEnvFile()}`,
+            //load: [configuration],
+            validationSchema: Joi.object({
+                PORT: Joi.number().default(3000).required(),
+                MONGO_URL: Joi.string().required(),
+                //NODE_ENV: Joi.string().default('development').valid('development', 'production', 'testing'),
+            }),
+        }), //add first
+        CqrsModule.forRoot(),
+        MongooseModule.forRootAsync({
+            useFactory: async (configService: ConfigService) => ({
+                uri: configService.get('MONGO_URL'),
+            }),
+            inject: [ConfigService],
+        }),
+        AuthModule,
+        EmailModule,
+        CacheModule.register({ isGlobal: false }),
+        DevicesModule,
+        ThrottlerModule.forRoot([
+            {
+                name: 'short',
+                ttl: 1000,
+                limit: 3,
+            },
+            {
+                name: 'medium',
+                ttl: 10000,
+                limit: 20,
+            },
+            {
+                name: 'long',
+                ttl: 60000,
+                limit: 100,
+            },
+        ]),
+        ...rolesModules,
+        ...entityModules,
+        DatabaseModule,
+        DraftModule,
+    ],
+    controllers: [AppController],
+    providers: [
+        AppService,
+        {
+            provide: APP_GUARD,
+            useClass: ThrottlerGuard,
+        },
+    ],
 })
 export class AppModule {
-	// configure(consumer: MiddlewareConsumer) {
-	// 	consumer
-	// 		.apply(PutRequestIntoCacheMiddleware, CheckRequestNumberMiddleware)
-	// 		.forRoutes('/auth/registration-confirmation', '/auth/registration-email-resending', '/auth/login', '/auth/registration')
-	// }
+    // configure(consumer: MiddlewareConsumer) {
+    // 	consumer
+    // 		.apply(PutRequestIntoCacheMiddleware, CheckRequestNumberMiddleware)
+    // 		.forRoutes('/auth/registration-confirmation', '/auth/registration-email-resending', '/auth/login', '/auth/registration')
+    // }
 }

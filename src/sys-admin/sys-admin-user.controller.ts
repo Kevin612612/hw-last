@@ -12,31 +12,31 @@ import { UsersService } from '../ENTITIES/user/user.service';
 @UseGuards(AuthGuardBasic)
 @Controller('sa/users')
 export class SysAdminUsersController {
-	constructor(@Inject(UsersService) protected usersService: UsersService) {}
+    constructor(@Inject(UsersService) protected usersService: UsersService) {}
 
-	@HttpCode(HttpStatus.NO_CONTENT)
-	@Put('/:userId/ban')
-	@LogClassName()
-	async banUser(@Param() userId: UserIdDTO, @Body() banDTO: BanDTO) {
-		return await this.usersService.banUser(userId.userId, banDTO);
-	}
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @Put('/:userId/ban')
+    @LogClassName()
+    async banUser(@Param() userId: UserIdDTO, @Body() banDTO: BanDTO) {
+        return await this.usersService.banUser(userId.userId, banDTO);
+    }
 
-	@Get()
-	@LogClassName()
-	async getAll(@Query() query: QueryUserDTO): Promise<UserTypeSchema> {
-		return await this.usersService.findAll(query);
-	}
+    @Get()
+    @LogClassName()
+    async getAll(@Query() query: QueryUserDTO): Promise<UserTypeSchema> {
+        return await this.usersService.findAll(query);
+    }
 
-	@Post()
-	@LogClassName()
-	async createUser(@Body() dto: UserDTO): Promise<UserViewType | string[]> {
-		return await this.usersService.createUser(dto);
-	}
+    @Post()
+    @LogClassName()
+    async createUser(@Body() dto: UserDTO): Promise<UserViewType | string[]> {
+        return await this.usersService.createUser(dto);
+    }
 
-	@HttpCode(HttpStatus.NO_CONTENT)
-	@Delete('/:userId')
-	@LogClassName()
-	async deleteUserById(@Param() params: UserIdDTO): Promise<boolean> {
-		return await this.usersService.deleteUserById(params.userId);
-	}
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @Delete('/:userId')
+    @LogClassName()
+    async deleteUserById(@Param() params: UserIdDTO): Promise<boolean> {
+        return await this.usersService.deleteUserById(params.userId);
+    }
 }

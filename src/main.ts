@@ -12,22 +12,21 @@ import { ConfigService } from '@nestjs/config';
  */
 
 async function bootstrap() {
-	const logger = new Logger(getClassName());
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-	const app = await NestFactory.create<NestExpressApplication>(AppModule);
+    appSettings(app);
 
-	appSettings(app);
+    const configService: ConfigService = await app.get(ConfigService);
+    const port = (await configService.get('PORT')) || 3002;
 
-	const configService: ConfigService = await app.get(ConfigService);
-	const port = (await configService.get('PORT')) || 3002;
+    /** preliminary operations */
+    preliminaryActions(app);
 
-	/** preliminary operations */
-	preliminaryActions(app);
-
-	await app.listen(port, () => {
-		console.log('##########################################################');
-		logger.log(`App started listening on port ${port} at ${new Date()}`);
-	});
+    await app.listen(port, () => {
+        console.log('##########################################################');
+        new Logger.log(`App started listening on port ${port} at ${new Date()}`);
+        console.log('##########################################################');
+    });
 }
 
 bootstrap();

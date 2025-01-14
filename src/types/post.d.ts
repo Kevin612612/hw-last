@@ -2,27 +2,27 @@ import { ExtendedLikesInfo } from '../entity_post/post.schema';
 import { ObjectId } from 'mongodb';
 
 export type NewestLikesType = {
-	userId: string;
-	login: string;
-	addedAt: string;
+    userId: string;
+    login: string;
+    addedAt: string;
 };
 
 export enum Assess {
-	Like = 'Like',
-	Dislike = 'Dislike',
-	None = 'None',
+    Like = 'Like',
+    Dislike = 'Dislike',
+    None = 'None',
 }
 
 export type UserAssessType = {
-	userIdLike: string;
-	assess: keyof typeof Assess;
+    userIdLike: string;
+    assess: keyof typeof Assess;
 };
 
 export type ExtendedLikesInfoType = {
-	likesCount: number;
-	dislikesCount: number;
-	myStatus: string;
-	newestLikes: NewestLikesType[];
+    likesCount: number;
+    dislikesCount: number;
+    myStatus: string;
+    newestLikes: NewestLikesType[];
 };
 
 //################################################################################################################
@@ -37,26 +37,26 @@ export type ExtendedLikesInfoType = {
 
 // POST VIEW TYPE
 export type PostViewType = {
-	id: string;
-	title: string;
-	shortDescription: string;
-	content: string;
-	blogId: string;
-	blogName: string;
-	createdAt: string;
-	extendedLikesInfo: ExtendedLikesInfoType;
+    id: string;
+    title: string;
+    shortDescription: string;
+    content: string;
+    blogId: string;
+    blogName: string;
+    createdAt: string;
+    extendedLikesInfo: ExtendedLikesInfoType;
 };
 
 //POST DATA VIEW TYPE
 export type PostDataViewType = PostViewType & {
-	userAssess: UserAssessType[];
+    userAssess: UserAssessType[];
 };
 
 // POST DATA TYPE
 export type PostDataType = PostViewType & {
-	_id: ObjectId;
-	userAssess: UserAssessType[];
-	__v: number;
+    _id: ObjectId;
+    userAssess: UserAssessType[];
+    __v: number;
 };
 
 //POST PAGING TYPE

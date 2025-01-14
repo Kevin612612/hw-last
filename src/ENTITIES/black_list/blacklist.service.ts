@@ -7,37 +7,37 @@ import { BlackListRepository } from './blacklist.repository';
 
 @Injectable()
 export class BlackListService {
-	constructor(@Inject(BlackListRepository) protected blackListRepository: BlackListRepository) {}
+    constructor(@Inject(BlackListRepository) protected blackListRepository: BlackListRepository) {}
 
-	/**
-	 *
-	 * @returns
-	 */
-	async deleteAllData() {
-		return await this.blackListRepository.deleteAllData();
-	}
+    /**
+     *
+     * @returns
+     */
+    async deleteAllData() {
+        return await this.blackListRepository.deleteAllData();
+    }
 
-	/**
-	 *
-	 * @returns
-	 */
-	async deleteTokens() {
-		return await this.blackListRepository.deleteTokens();
-	}
+    /**
+     *
+     * @returns
+     */
+    async deleteTokens() {
+        return await this.blackListRepository.deleteTokens();
+    }
 
-	/**
-	 *
-	 * @returns
-	 */
-	async createBlackList() {
-		return await this.blackListRepository.createBlackList();
-	}
+    /**
+     *
+     * @returns
+     */
+    async createBlackList() {
+        return await this.blackListRepository.createBlackList();
+    }
 
-	/**
-	 * @param token
-	 * @returns
-	 */
-	async addToken(token: string): Promise<boolean> {
-		return await this.blackListRepository.addToken(token);
-	}
+    /**
+     * @param token
+     * @returns
+     */
+    async addToken(token: string): Promise<boolean> {
+        return await this.blackListRepository.addToken(token);
+    }
 }

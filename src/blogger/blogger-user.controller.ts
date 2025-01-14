@@ -11,20 +11,20 @@ import { BlogUserBanDTO } from '../ENTITIES/blog/dto/blogInputDTO';
 @UseGuards(AuthGuardBearer)
 @Controller('blogger/users')
 export class BloggerUsersController {
-	constructor(@Inject(BlogService) protected blogService: BlogService) {}
+    constructor(@Inject(BlogService) protected blogService: BlogService) {}
 
-	@HttpCode(HttpStatus.NO_CONTENT)
-	@Put('/:userId/ban')
-	@LogClassName()
-	async banUser(@Param() userId: UserIdDTO, @Body() banDTO: BlogUserBanDTO, @Req() req) {
-		const OwnerUserId = req.user?.id || null;
-		return await this.blogService.banUser(userId.userId, banDTO, OwnerUserId);
-	}
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @Put('/:userId/ban')
+    @LogClassName()
+    async banUser(@Param() userId: UserIdDTO, @Body() banDTO: BlogUserBanDTO, @Req() req) {
+        const OwnerUserId = req.user?.id || null;
+        return await this.blogService.banUser(userId.userId, banDTO, OwnerUserId);
+    }
 
-	@Get('/blog/:blogId')
-	@LogClassName()
-	async getAllBannedUsersForBlog(@Param() blogId: BlogIdDTO_1, @Query() query: QueryDTO, @Req() req) {
-		const userId = req.user?.id || null;
-		return await this.blogService.findAllBannedUsers(blogId.blogId, userId, query);
-	}
+    @Get('/blog/:blogId')
+    @LogClassName()
+    async getAllBannedUsersForBlog(@Param() blogId: BlogIdDTO_1, @Query() query: QueryDTO, @Req() req) {
+        const userId = req.user?.id || null;
+        return await this.blogService.findAllBannedUsers(blogId.blogId, userId, query);
+    }
 }

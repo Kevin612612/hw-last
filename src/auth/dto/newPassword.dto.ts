@@ -1,8 +1,8 @@
 import { Length } from 'class-validator';
 
 export class NewPasswordDTO {
-	recoveryCode: string;
+    recoveryCode: string;
 
-	@Length(1, 10)
-	newPassword: string;
+    @Length(1, 10)
+    newPassword: string;
 }

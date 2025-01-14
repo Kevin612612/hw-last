@@ -5,8 +5,8 @@ import { BlogModule } from '../ENTITIES/blog/blog.module';
 import { UserModule } from '../ENTITIES/user/user.module';
 
 @Module({
-	imports: [UserModule, BlogModule],
-	controllers: [SysAdminUsersController, SysAdminBlogController],
-	providers: [],
+    imports: [UserModule, BlogModule],
+    controllers: [SysAdminUsersController, SysAdminBlogController],
+    providers: [],
 })
 export class SysAdminModule {}

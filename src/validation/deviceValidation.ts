@@ -6,18 +6,18 @@ import { RefreshTokensRepository } from '../ENTITIES/tokens/refreshtoken.reposit
 @ValidatorConstraint({ name: 'DeviceExists', async: true })
 @Injectable()
 export class DeviceExistsValidation implements ValidatorConstraintInterface {
-	constructor(@Inject(RefreshTokensRepository) private refreshTokensRepository: RefreshTokensRepository) {}
+    constructor(@Inject(RefreshTokensRepository) private refreshTokensRepository: RefreshTokensRepository) {}
 
-	@LogClassName()
-	async validate(value: string) {
-		const token = (await this.refreshTokensRepository.findTokenByDeviceId(value)) || null;
-		if (!token) {
-			throw new NotFoundException(["Device doesn't exist"]);
-		}
-		return true;
-	}
+    @LogClassName()
+    async validate(value: string) {
+        const token = (await this.refreshTokensRepository.findTokenByDeviceId(value)) || null;
+        if (!token) {
+            throw new NotFoundException(["Device doesn't exist"]);
+        }
+        return true;
+    }
 
-	defaultMessage() {
-		return `Device doesn't exist`;
-	}
+    defaultMessage() {
+        return `Device doesn't exist`;
+    }
 }

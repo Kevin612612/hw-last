@@ -7,8 +7,8 @@ import { BlogModule } from '../ENTITIES/blog/blog.module';
 import { PostModule } from '../ENTITIES/post/post.module';
 
 @Module({
-	imports: [TokenModule, UserModule, BlogModule, PostModule],
-	controllers: [BloggerUsersController, BloggerBlogsController],
-	providers: [],
+    imports: [TokenModule, UserModule, BlogModule, PostModule],
+    controllers: [BloggerUsersController, BloggerBlogsController],
+    providers: [],
 })
 export class BloggerModule {}

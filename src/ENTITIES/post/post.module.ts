@@ -13,18 +13,18 @@ import { CommentsModule } from '../comment/comment.module';
 import { PostExistsValidation } from '../../validation/postValidation';
 
 @Module({
-	imports: [
-		MongooseModule.forFeature([
-			{ name: Post.name, schema: PostSchema },
-			{ name: Blog.name, schema: BlogSchema },
-		]),
-		TokenModule,
-		UserModule,
-		BlackListModule,
-		CommentsModule,
-	],
-	controllers: [PostController],
-	providers: [PostService, PostRepository, PostExistsValidation, BlogRepository],
-	exports: [PostService, PostRepository],
+    imports: [
+        MongooseModule.forFeature([
+            { name: Post.name, schema: PostSchema },
+            { name: Blog.name, schema: BlogSchema },
+        ]),
+        TokenModule,
+        UserModule,
+        BlackListModule,
+        CommentsModule,
+    ],
+    controllers: [PostController],
+    providers: [PostService, PostRepository, PostExistsValidation, BlogRepository],
+    exports: [PostService, PostRepository],
 })
 export class PostModule {}

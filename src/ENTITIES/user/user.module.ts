@@ -8,9 +8,9 @@ import { TokenModule } from '../tokens/tokens.module';
 import { UserExistsValidation, CodeAlreadyConfirmedValidation } from '../../validation/userValidation';
 
 @Module({
-	imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]), TokenModule],
-	controllers: [],
-	providers: [UsersService, UserRepository, UserExistsValidation, CodeAlreadyConfirmedValidation],
-	exports: [UsersService, UserRepository],
+    imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]), TokenModule],
+    controllers: [],
+    providers: [UsersService, UserRepository, UserExistsValidation, CodeAlreadyConfirmedValidation],
+    exports: [UsersService, UserRepository],
 })
 export class UserModule {}

@@ -13,23 +13,23 @@ import { TokenModule } from '../tokens/tokens.module';
 import { UserModule } from '../user/user.module';
 
 @Module({
-	imports: [
-		MongooseModule.forFeature([{ name: Blog.name, schema: BlogSchema }]),
-		UserModule,
-		PostModule,
-		CommentsModule,
-		TokenModule,
-		BlackListModule,
-	],
-	controllers: [BlogController],
-	providers: [BlogService, BlogRepository, BlogExistsValidation, BlogHasOwnerValidation],
-	exports: [BlogService, BlogRepository],
+    imports: [
+        MongooseModule.forFeature([{ name: Blog.name, schema: BlogSchema }]),
+        UserModule,
+        PostModule,
+        CommentsModule,
+        TokenModule,
+        BlackListModule,
+    ],
+    controllers: [BlogController],
+    providers: [BlogService, BlogRepository, BlogExistsValidation, BlogHasOwnerValidation],
+    exports: [BlogService, BlogRepository],
 })
 export class BlogModule {
-	// configure(consumer: MiddlewareConsumer) {
-	// 	consumer
-	// 		.apply(LoggerMiddleware)
-	// 		.exclude({ path: 'blogs', method: RequestMethod.POST })
-	// 		.forRoutes({ path: 'blogs', method: RequestMethod.GET });
-	// }
+    // configure(consumer: MiddlewareConsumer) {
+    // 	consumer
+    // 		.apply(LoggerMiddleware)
+    // 		.exclude({ path: 'blogs', method: RequestMethod.POST })
+    // 		.forRoutes({ path: 'blogs', method: RequestMethod.GET });
+    // }
 }
