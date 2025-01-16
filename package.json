@@ -9,14 +9,6 @@
         "node": "20"
     },
     "main": "dist/src/main.js",
-    "tasks": [
-        {
-            "label": "Format Current File",
-            "type": "shell",
-            "command": "npm run format:current --file=${file}",
-            "problemMatcher": []
-        }
-    ],
     "scripts": {
         "build": "nest build",
         "build:watch": "tsc --watch",

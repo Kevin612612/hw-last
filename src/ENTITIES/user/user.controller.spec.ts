@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { AppModule } from '../app.module';
-import { createUser } from '../ENTITIES/entity_blog/blog.controller.spec';
+import { AppModule } from 'src/app.module';
+import { createUser } from '../blog/tests/blog.controller.spec';
 
 jest.setTimeout(100000);
 
