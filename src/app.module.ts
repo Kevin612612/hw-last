@@ -37,7 +37,7 @@ const rolesModules = [SysAdminModule, BloggerModule];
             validationSchema: Joi.object({
                 PORT: Joi.number().default(3000).required(),
                 MONGO_URL: Joi.string().required(),
-                //NODE_ENV: Joi.string().default('development').valid('development', 'production', 'testing'),
+                //NODE_ENV: Joi.string().default('development').valid('development', 'production', 'deployment'),
             }),
         }), //add first
         CqrsModule.forRoot(),
