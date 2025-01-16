@@ -8,7 +8,8 @@ import { preliminaryActions } from './pre-operations';
 import { ConfigService } from '@nestjs/config';
 
 /**
- * Entrance into the app
+ *
+ * ENTRANCE INTO THE APP
  */
 
 async function bootstrap() {
