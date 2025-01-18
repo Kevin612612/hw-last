@@ -19,7 +19,7 @@ import { SysAdminModule } from './sys-admin/sys-admin.module';
 import { BloggerModule } from './blogger/blogger.module';
 import { DatabaseModule } from './database/database.module';
 import { DraftModule } from './draft/draft.module';
-import configuration from './custom.configuration';
+import DatabaseConfiguration from './config/database.config';
 import { PostModule } from './ENTITIES/post/post.module';
 import { TokenModule } from './ENTITIES/tokens/tokens.module';
 import { UserModule } from './ENTITIES/user/user.module';
@@ -33,11 +33,11 @@ const rolesModules = [SysAdminModule, BloggerModule];
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: `src/environments/${getEnvFile()}`,
-            //load: [configuration],
+            load: [DatabaseConfiguration, , ],
             validationSchema: Joi.object({
                 PORT: Joi.number().default(3000).required(),
                 MONGO_URL: Joi.string().required(),
-                //NODE_ENV: Joi.string().default('development').valid('development', 'production', 'deployment'),
+                NODE_ENV: Joi.string().default('development').valid('development', 'production', 'deployment'),
             }),
         }), //add first
         CqrsModule.forRoot(),
