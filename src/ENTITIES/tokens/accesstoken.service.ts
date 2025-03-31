@@ -45,8 +45,8 @@ export class AccessTokenService {
 
     //(3) check type of payload
     async isPayloadValid(payload: AccessTokensPayloadType): Promise<boolean> {
-        const requiredKeys = ['loginOrEmail', 'sub', 'expiresIn', 'iat', 'exp'];
-        return requiredKeys.every((key) => payload.hasOwnProperty(key));
+        const requiredKeys = ['loginOrEmail', 'sub', 'expiresIn', 'iat', 'exp'] as const;
+        return requiredKeys.every((key) => Object.prototype.hasOwnProperty.call(payload, key));
     }
 
     //(4) check token expiration

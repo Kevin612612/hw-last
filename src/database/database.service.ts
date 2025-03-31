@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
 
 @Injectable()
-export class DatabaseService {
-    constructor(@InjectConnection() private connection: Connection) {}
-
-    getConnection() {
-        return this.connection;
-    }
+export abstract class DatabaseService {
+    abstract findOne(collection: string, id: string): Promise<any>;
+    abstract findAll(collection: string): Promise<any[]>;
+    abstract create(collection: string, data: any): Promise<any>;
+    abstract update(collection: string, id: string, data: any): Promise<any>;
+    abstract delete(collection: string, id: string): Promise<void>;
 }

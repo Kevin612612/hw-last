@@ -6,7 +6,9 @@ export default registerAs('database', () => {
     if (dbType === 'mongo') {
         return {
             type: 'mongo',
-            URL: process.env.MONGO_URL || 'mongodb://localhost:27017/nestjs_database',
+            PORT: process.env.PORT,
+            MONGO_URL: process.env.MONGO_URL,
+            NODE_ENV: process.env.NODE_ENV,
         };
     } else if (dbType === 'firebase') {
         return {

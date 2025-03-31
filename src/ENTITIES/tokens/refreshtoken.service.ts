@@ -57,8 +57,8 @@ export class RefreshTokenService {
 
     //(3) check type of payload
     async isPayloadValid(payload: RefreshTokensPayloadType): Promise<boolean> {
-        const requiredKeys = ['userId', 'login', 'email', 'deviceId', 'expiresIn', 'iat'];
-        return requiredKeys.every((key) => payload.hasOwnProperty(key));
+        const requiredKeys = ['userId', 'login', 'email', 'deviceId', 'expiresIn', 'iat'] as const;
+        return requiredKeys.every((key) => Object.prototype.hasOwnProperty.call(payload, key));
     }
 
     //(4) check token expiration

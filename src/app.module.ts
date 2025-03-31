@@ -2,7 +2,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { CacheModule } from '@nestjs/cache-manager';
 import { MongooseModule } from '@nestjs/mongoose';
-import Joi from 'joi';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
@@ -19,27 +18,34 @@ import { SysAdminModule } from './sys-admin/sys-admin.module';
 import { BloggerModule } from './blogger/blogger.module';
 import { DatabaseModule } from './database/database.module';
 import { DraftModule } from './draft/draft.module';
-import DatabaseConfiguration from './config/database.config';
 import { PostModule } from './ENTITIES/post/post.module';
 import { TokenModule } from './ENTITIES/tokens/tokens.module';
 import { UserModule } from './ENTITIES/user/user.module';
 import { getEnvFile } from './environments/env';
+import DatabaseConfiguration from './config/database.config';
+import Joi from 'joi';
 
 const entityModules = [UserModule, BlogModule, PostModule, CommentModule, TokenModule, BlackListModule];
 const rolesModules = [SysAdminModule, BloggerModule];
 
 @Module({
     imports: [
+        //Все модули, которые используются в текущем модуле, указываются в этом массиве.
         ConfigModule.forRoot({
-            isGlobal: true,
-            envFilePath: `src/environments/${getEnvFile()}`,
-            load: [DatabaseConfiguration, , ],
+            // добавляем первым
+            isGlobal: true, // можно использовать в любом месте
+            envFilePath: `src/environments/${getEnvFile()}`, //загружаем среду, например development.env
+            load: [DatabaseConfiguration], // загружаем конфигурацию базы данных в зависимости от выбранной БД
             validationSchema: Joi.object({
-                PORT: Joi.number().default(3000).required(),
-                MONGO_URL: Joi.string().required(),
+                type: Joi.string().required(),
+                PORT: Joi.number().default(3002).required(),
+                MONGO_URL: Joi.string(),
                 NODE_ENV: Joi.string().default('development').valid('development', 'production', 'deployment'),
+                projectId: Joi.string(),
+                privateKey: Joi.string(),
+                clientEmail: Joi.string(),
             }),
-        }), //add first
+        }),
         CqrsModule.forRoot(),
         MongooseModule.forRootAsync({
             useFactory: async (configService: ConfigService) => ({
@@ -49,7 +55,7 @@ const rolesModules = [SysAdminModule, BloggerModule];
         }),
         AuthModule,
         EmailModule,
-        CacheModule.register({ isGlobal: false }),
+        CacheModule.register({ isGlobal: true }),
         DevicesModule,
         ThrottlerModule.forRoot([
             {
@@ -70,7 +76,7 @@ const rolesModules = [SysAdminModule, BloggerModule];
         ]),
         ...rolesModules,
         ...entityModules,
-        DatabaseModule,
+        DatabaseModule, // Динамическая инициализация базы данных
         DraftModule,
     ],
     controllers: [AppController],

@@ -23,7 +23,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
                 response.status(status).json({ message: 'Unauthorized' });
                 break;
 
-            default:
+            default: {
                 const result = {
                     statusCode: status,
                     timestamp: new Date().toISOString(),
@@ -31,6 +31,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
                 };
                 response.status(status).json(result);
                 break;
+            }
         }
     }
 
